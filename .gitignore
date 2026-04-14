@@ -1,0 +1,6 @@
+node_modules/
+.env
+.env.local
+.headline-cache.json
+.DS_Store
+Thumbs.db

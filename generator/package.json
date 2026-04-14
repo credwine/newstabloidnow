@@ -1,0 +1,15 @@
+{
+  "name": "newstabloidnow-generator",
+  "version": "1.0.0",
+  "description": "Content generator for News Tabloid Now satirical news site",
+  "main": "generate.js",
+  "scripts": {
+    "generate": "node generate.js",
+    "generate:dry": "node generate.js --dry-run"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.4.7",
+    "rss-parser": "^3.13.0"
+  }
+}
