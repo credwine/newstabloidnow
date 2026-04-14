@@ -1,8 +1,9 @@
+require("dotenv").config();
 const { GoogleGenAI } = require("@google/genai");
 const fs = require("fs");
 const path = require("path");
 
-const API_KEY = "REDACTED";
+const API_KEY = process.env.GEMINI_API_KEY;
 const IMAGES_DIR = path.join(__dirname, "images");
 
 const articles = [
