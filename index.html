@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
@@ -54,21 +54,21 @@
   <div class="top-bar">
     <div class="container">
       <time class="top-bar__date" datetime="2026-04-13">Sunday, April 13, 2026</time>
-      <button class="theme-toggle" aria-label="Toggle dark and light mode">
+      <button class="theme-toggle" aria-label="Toggle day and night edition">
         <span class="theme-toggle__icon" aria-hidden="true">&#9790;</span>
-        <span class="theme-toggle__label">Light Mode</span>
+        <span class="theme-toggle__label">Night Edition</span>
       </button>
     </div>
   </div>
 
-  <!-- Masthead -->
+  <!-- Masthead / Nameplate -->
   <header class="masthead">
     <div class="container">
-      <a href="index.html">
-        <h1 class="masthead__title">NEWS TABLOID NOW</h1>
-      </a>
+      <hr class="masthead__rule-top" aria-hidden="true">
+      <h1 class="masthead__title"><a href="index.html">NEWS TABLOID NOW</a></h1>
       <p class="masthead__tagline">Seriously Hilarious. Unbelievably True.</p>
-      <div class="masthead__accent-line" aria-hidden="true"></div>
+      <p class="masthead__dateline">Vol. I, No. 1 &ensp;|&ensp; Sunday, April 13, 2026 &ensp;|&ensp; Final Edition &ensp;|&ensp; Price: Free (Your Sanity May Vary)</p>
+      <hr class="masthead__rule-double" aria-hidden="true">
     </div>
   </header>
 
@@ -82,256 +82,166 @@
       </button>
       <div class="nav-links" id="nav-links" role="menubar">
         <a href="categories/politics.html" role="menuitem">Politics</a>
+        <span class="nav-sep" aria-hidden="true">&#8226;</span>
         <a href="categories/pop-culture.html" role="menuitem">Pop Culture</a>
+        <span class="nav-sep" aria-hidden="true">&#8226;</span>
         <a href="categories/tech.html" role="menuitem">Tech</a>
+        <span class="nav-sep" aria-hidden="true">&#8226;</span>
         <a href="categories/world.html" role="menuitem">World</a>
+        <span class="nav-sep" aria-hidden="true">&#8226;</span>
         <a href="categories/science.html" role="menuitem">Science</a>
+        <span class="nav-sep" aria-hidden="true">&#8226;</span>
         <a href="categories/sports.html" role="menuitem">Sports</a>
+        <span class="nav-sep" aria-hidden="true">&#8226;</span>
+        <a href="about.html" role="menuitem">About</a>
       </div>
     </div>
   </nav>
 
-  <!-- Breaking News Ticker -->
-  <div class="breaking-ticker" aria-label="Breaking news ticker">
-    <span class="breaking-ticker__label" aria-hidden="true">BREAKING</span>
-    <div class="breaking-ticker__track">
-      <div class="breaking-ticker__content">
-        <span class="breaking-ticker__item">Area Man Discovers 'Unsubscribe' Button After 7 Years of Promotional Emails</span>
-        <span class="breaking-ticker__separator" aria-hidden="true">|</span>
-        <span class="breaking-ticker__item">Local Dog Convinced It Invented Fetch</span>
-        <span class="breaking-ticker__separator" aria-hidden="true">|</span>
-        <span class="breaking-ticker__item">WiFi Goes Down for 3 Minutes, Society Nearly Collapses</span>
-        <span class="breaking-ticker__separator" aria-hidden="true">|</span>
-        <span class="breaking-ticker__item">Man Who 'Does His Own Research' Still Cannot Assemble IKEA Bookshelf</span>
-        <span class="breaking-ticker__separator" aria-hidden="true">|</span>
-      </div>
-    </div>
-  </div>
-
   <!-- Main Content -->
   <main id="main-content">
+    <div class="container">
 
-    <!-- Hero Section -->
-    <section class="hero" aria-label="Featured stories">
-      <div class="container">
-        <div class="hero__grid">
+      <!-- Breaking News Box -->
+      <div class="breaking-box">
+        <span class="breaking-box__label">BREAKING</span>
+        <ul class="breaking-box__items">
+          <li>Area Man Discovers 'Unsubscribe' Button After 7 Years of Promotional Emails</li>
+          <li>Local Dog Convinced It Invented Fetch</li>
+          <li>WiFi Goes Down for 3 Minutes; Society Nearly Collapses</li>
+          <li>Man Who 'Does His Own Research' Still Cannot Assemble IKEA Bookshelf</li>
+        </ul>
+      </div>
 
-          <!-- Featured Article -->
-          <div class="hero__featured">
-            <a href="articles/2026-04-13-senate-replaces-filibuster-eating-contest.html" class="hero__featured-link">
-              <div class="gradient-img gradient-img--politics" role="img" aria-label="Senate chamber illustration"></div>
-              <div class="hero__featured-content">
-                <span class="category-tag category-tag--politics">Politics</span>
-                <h2 class="hero__featured-headline">Senate Unanimously Votes to Replace Filibuster With Competitive Eating Contest</h2>
-                <p class="hero__featured-excerpt">Both parties agreed it was the first productive thing Congress has done in years. Nathan's Hot Dogs has been named the official parliamentary sponsor.</p>
-                <div class="hero__featured-meta">
-                  <span>Chad Thunderpen</span>
-                  <span>5 min read</span>
-                  <span>April 13, 2026</span>
-                </div>
-              </div>
-            </a>
-          </div>
+      <!-- ==========================================
+           ABOVE THE FOLD - Lead Story
+           ========================================== -->
+      <section class="lead-story" aria-label="Lead story">
+        <h2 class="lead-story__headline">
+          <a href="articles/2026-04-13-senate-replaces-filibuster-eating-contest.html">Senate Unanimously Votes to Replace Filibuster With Competitive Eating Contest</a>
+        </h2>
+        <p class="lead-story__byline">By <span class="author-name">Chad Thunderpen</span> &ensp;|&ensp; April 13, 2026 &ensp;|&ensp; 5 min read</p>
 
-          <!-- Sidebar Stories -->
-          <aside class="hero__sidebar">
-            <a href="articles/2026-04-13-apple-iphone-47-mirror-subscription.html" class="hero__side-story">
-              <div class="hero__side-img gradient-img gradient-img--tech" role="img" aria-label="iPhone illustration"></div>
-              <div class="hero__side-content">
-                <span class="category-tag category-tag--tech">Tech</span>
-                <h3 class="hero__side-headline">Apple Unveils iPhone 47: It's Just a Mirror With a $2,499 Monthly Subscription</h3>
-                <p class="hero__side-meta">Diana Clicksworth / 4 min</p>
-              </div>
-            </a>
+        <div class="lead-story__image-wrap">
+          <img class="article-img" src="https://picsum.photos/seed/capitol/800/500" alt="Senate chamber during the historic vote" width="800" height="500" loading="eager">
+          <p class="article-img-caption">Senators prepare for what experts are calling "the most important meal in legislative history." Photo: C-SPAN Archives</p>
+        </div>
 
-            <a href="articles/2026-04-12-influencer-hospitalized-unfiltered-life.html" class="hero__side-story">
-              <div class="hero__side-img gradient-img gradient-img--popculture" role="img" aria-label="Social media illustration"></div>
-              <div class="hero__side-content">
-                <span class="category-tag category-tag--popculture">Pop Culture</span>
-                <h3 class="hero__side-headline">Local Influencer Hospitalized After Attempting to Live an Unfiltered Life for 24 Hours</h3>
-                <p class="hero__side-meta">Pepper Scoop / 3 min</p>
-              </div>
-            </a>
+        <div class="lead-story__text">
+          <p class="drop-cap">Both parties agreed it was the first productive thing Congress has done in years. Nathan's Hot Dogs has been named the official parliamentary sponsor, and the Congressional cafeteria has been upgraded to include a regulation competitive eating table with built-in condiment dispensers. The bipartisan legislation, dubbed the "Put Up or Shut Up Act," passed 100 to 0, marking the first unanimous vote since the 2019 resolution declaring pizza "pretty good."</p>
+          <p>Opponents of the old filibuster system, which allowed senators to talk indefinitely to delay votes, say the new system is both more entertaining and more efficient. "At least now when someone wastes everyone's time, we get a show," said Senator Martha Dillworth (D-OH), while stretching her jaw in preparation for her first official session. The Vice President has been issued a referee whistle and a napkin.</p>
+        </div>
 
-            <a href="articles/2026-04-12-switzerland-accidentally-takes-side.html" class="hero__side-story">
-              <div class="hero__side-img gradient-img gradient-img--world" role="img" aria-label="Switzerland illustration"></div>
-              <div class="hero__side-content">
-                <span class="category-tag category-tag--world">World</span>
-                <h3 class="hero__side-headline">Switzerland Accidentally Takes a Side, Throws Entire Country Into Existential Crisis</h3>
-                <p class="hero__side-meta">Blaine Deadline / 6 min</p>
-              </div>
-            </a>
-          </aside>
+        <p class="lead-story__continued"><a href="articles/2026-04-13-senate-replaces-filibuster-eating-contest.html">Continued on Page A1 &raquo;</a></p>
+      </section>
+
+      <hr class="rule-double" aria-hidden="true">
+
+      <!-- ==========================================
+           SECONDARY STORIES - 3-column grid
+           ========================================== -->
+      <section class="secondary-stories" aria-label="Secondary stories">
+        <div class="secondary-stories__grid">
+
+          <!-- Story 2: Tech -->
+          <article class="secondary-story">
+            <span class="category-tag category-tag--tech">Technology</span>
+            <div class="secondary-story__image-wrap">
+              <img class="article-img" src="https://picsum.photos/seed/phone42/800/500" alt="The new iPhone 47 on display" width="400" height="250" loading="lazy">
+              <p class="article-img-caption">Apple calls it "courage." Customers call it "a mirror." Photo: Apple Press Room</p>
+            </div>
+            <h3 class="secondary-story__headline">
+              <a href="articles/2026-04-13-apple-iphone-47-mirror-subscription.html">Apple Unveils iPhone 47: It's Just a Mirror With a $2,499 Monthly Subscription</a>
+            </h3>
+            <p class="secondary-story__byline">By <span class="author-name">Diana Clicksworth</span> &ensp;|&ensp; April 13</p>
+            <p class="secondary-story__excerpt">Tim Cook called it "the most courageous device we've ever charged you for." Features include your own reflection and a new Self-Awareness app that costs extra. Early adopters report that the device does exactly what a bathroom mirror does, but with significantly worse battery life.</p>
+            <p class="secondary-story__continued"><a href="articles/2026-04-13-apple-iphone-47-mirror-subscription.html">Continued on Page A3 &raquo;</a></p>
+          </article>
+
+          <!-- Story 3: Pop Culture -->
+          <article class="secondary-story">
+            <span class="category-tag category-tag--popculture">Pop Culture</span>
+            <div class="secondary-story__image-wrap">
+              <img class="article-img" src="https://picsum.photos/seed/camera33/800/500" alt="Influencer being wheeled into hospital" width="400" height="250" loading="lazy">
+              <p class="article-img-caption">Emergency crews responded within minutes of the first unedited selfie. Photo: Staff</p>
+            </div>
+            <h3 class="secondary-story__headline">
+              <a href="articles/2026-04-12-influencer-hospitalized-unfiltered-life.html">Local Influencer Hospitalized After Attempting to Live an Unfiltered Life for 24 Hours</a>
+            </h3>
+            <p class="secondary-story__byline">By <span class="author-name">Pepper Scoop</span> &ensp;|&ensp; April 12</p>
+            <p class="secondary-story__excerpt">Doctors diagnosed her with acute reality syndrome. She reportedly tried to eat a meal without photographing it and immediately lost consciousness. Her engagement rate dropped 47% during the incident, which she described as "worse than the hospitalization itself."</p>
+            <p class="secondary-story__continued"><a href="articles/2026-04-12-influencer-hospitalized-unfiltered-life.html">Continued on Page A5 &raquo;</a></p>
+          </article>
+
+          <!-- Story 4: World -->
+          <article class="secondary-story">
+            <span class="category-tag category-tag--world">World</span>
+            <div class="secondary-story__image-wrap">
+              <img class="article-img" src="https://picsum.photos/seed/alps/800/500" alt="Swiss landscape with flag" width="400" height="250" loading="lazy">
+              <p class="article-img-caption">The Alps remained neutral. The rest of Switzerland was not so lucky. Photo: Reuters</p>
+            </div>
+            <h3 class="secondary-story__headline">
+              <a href="articles/2026-04-12-switzerland-accidentally-takes-side.html">Switzerland Accidentally Takes a Side, Throws Entire Country Into Existential Crisis</a>
+            </h3>
+            <p class="secondary-story__byline">By <span class="author-name">Blaine Deadline</span> &ensp;|&ensp; April 12</p>
+            <p class="secondary-story__excerpt">The Swiss franc dropped 12% as markets reacted to what analysts are calling "an opinion." The prime minister has issued a formal apology for "having a thought." Fondue sales have stalled as citizens grapple with this unprecedented deviation from centuries of diplomatic fence-sitting.</p>
+            <p class="secondary-story__continued"><a href="articles/2026-04-12-switzerland-accidentally-takes-side.html">Continued on Page A7 &raquo;</a></p>
+          </article>
 
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Trending Now -->
-    <section class="trending" aria-label="Trending stories">
-      <div class="container">
+      <!-- ==========================================
+           MORE STORIES
+           ========================================== -->
+      <section class="more-stories" aria-label="More stories">
         <div class="section-header">
-          <h2 class="section-header__title">Trending Now</h2>
-          <div class="section-header__line" aria-hidden="true"></div>
+          <hr class="section-header__rule-top" aria-hidden="true">
+          <h2 class="section-header__title">More Stories</h2>
+          <hr class="section-header__rule-bottom" aria-hidden="true">
         </div>
-        <div class="trending__grid">
 
-          <a href="articles/2026-04-12-scientists-choosing-what-to-watch.html" class="trending-card">
-            <div class="trending-card__img">
-              <div class="gradient-img gradient-img--science" role="img" aria-label="Science illustration"></div>
-            </div>
-            <div class="trending-card__body">
-              <span class="category-tag category-tag--science">Science</span>
-              <h3 class="trending-card__headline">Scientists Confirm Average Human Spends More Time Choosing What to Watch Than Actually Watching</h3>
-              <p class="trending-card__meta">Rex Headliner / 4 min read</p>
-            </div>
-          </a>
+        <div class="more-stories__grid">
 
-          <a href="articles/2026-04-11-youth-soccer-bans-parents.html" class="trending-card">
-            <div class="trending-card__img">
-              <div class="gradient-img gradient-img--sports" role="img" aria-label="Sports illustration"></div>
+          <!-- Science -->
+          <article class="more-story">
+            <span class="category-tag category-tag--science more-story__category">Science</span>
+            <div class="more-story__image-wrap">
+              <img class="article-img" src="https://picsum.photos/seed/research/800/500" alt="Scientists in a lab studying browsing habits" width="400" height="250" loading="lazy">
+              <p class="article-img-caption">Researchers spent four years watching people scroll past the same three shows. Photo: Journal of Streaming Sciences</p>
             </div>
-            <div class="trending-card__body">
-              <span class="category-tag category-tag--sports">Sports</span>
-              <h3 class="trending-card__headline">Youth Soccer League Bans Parents After Referee Enters Witness Protection Program</h3>
-              <p class="trending-card__meta">Chad Thunderpen / 3 min read</p>
-            </div>
-          </a>
+            <h3 class="more-story__headline">
+              <a href="articles/2026-04-12-scientists-choosing-what-to-watch.html">Scientists Confirm Average Human Spends More Time Choosing What to Watch Than Actually Watching</a>
+            </h3>
+            <p class="more-story__byline">By <span class="author-name">Rex Headliner</span> &ensp;|&ensp; April 12 &ensp;|&ensp; 4 min read</p>
+            <p class="more-story__excerpt">Netflix has responded by introducing a "Just Pick Something" button that costs $4.99 per month. Hulu countered with a "Watch This or We Cancel It" feature. The average participant in the study scrolled through 237 titles before settling on the same episode of The Office they had already seen fourteen times.</p>
+            <p class="more-story__continued"><a href="articles/2026-04-12-scientists-choosing-what-to-watch.html">Continued on Page B1 &raquo;</a></p>
+          </article>
 
-          <a href="articles/2026-04-13-apple-iphone-47-mirror-subscription.html" class="trending-card">
-            <div class="trending-card__img">
-              <div class="gradient-img gradient-img--tech" role="img" aria-label="Tech illustration"></div>
+          <!-- Sports -->
+          <article class="more-story">
+            <span class="category-tag category-tag--sports more-story__category">Sports</span>
+            <div class="more-story__image-wrap">
+              <img class="article-img" src="https://picsum.photos/seed/field99/800/500" alt="Empty youth soccer field with cardboard parent cutouts" width="400" height="250" loading="lazy">
+              <p class="article-img-caption">Cardboard parents have already improved sideline behavior by 100%. Photo: Youth Soccer Monthly</p>
             </div>
-            <div class="trending-card__body">
-              <span class="category-tag category-tag--tech">Tech</span>
-              <h3 class="trending-card__headline">Apple Unveils iPhone 47: It's Just a Mirror With a $2,499 Monthly Subscription</h3>
-              <p class="trending-card__meta">Diana Clicksworth / 4 min read</p>
-            </div>
-          </a>
-
-          <a href="articles/2026-04-12-switzerland-accidentally-takes-side.html" class="trending-card">
-            <div class="trending-card__img">
-              <div class="gradient-img gradient-img--world" role="img" aria-label="World illustration"></div>
-            </div>
-            <div class="trending-card__body">
-              <span class="category-tag category-tag--world">World</span>
-              <h3 class="trending-card__headline">Switzerland Accidentally Takes a Side, Throws Entire Country Into Existential Crisis</h3>
-              <p class="trending-card__meta">Blaine Deadline / 6 min read</p>
-            </div>
-          </a>
+            <h3 class="more-story__headline">
+              <a href="articles/2026-04-11-youth-soccer-bans-parents.html">Youth Soccer League Bans Parents After Referee Enters Witness Protection Program</a>
+            </h3>
+            <p class="more-story__byline">By <span class="author-name">Chad Thunderpen</span> &ensp;|&ensp; April 11 &ensp;|&ensp; 3 min read</p>
+            <p class="more-story__excerpt">The referee, known only as Steve, was last seen coaching underwater basket weaving in an undisclosed location. Parents have been replaced by cardboard cutouts, which have already shown a marked improvement in sideline behavior. The league reports that player enjoyment has increased 340% since the ban.</p>
+            <p class="more-story__continued"><a href="articles/2026-04-11-youth-soccer-bans-parents.html">Continued on Page B3 &raquo;</a></p>
+          </article>
 
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Latest Articles -->
-    <section class="latest" aria-label="Latest articles">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-header__title">Latest</h2>
-          <div class="section-header__line" aria-hidden="true"></div>
-        </div>
-        <div class="latest__grid">
-
-          <a href="articles/2026-04-13-senate-replaces-filibuster-eating-contest.html" class="article-card">
-            <div class="article-card__img">
-              <div class="gradient-img gradient-img--politics" role="img" aria-label="Politics illustration"></div>
-            </div>
-            <div class="article-card__body">
-              <span class="category-tag category-tag--politics">Politics</span>
-              <h3 class="article-card__headline">Senate Unanimously Votes to Replace Filibuster With Competitive Eating Contest</h3>
-              <p class="article-card__excerpt">Both parties agreed it was the first productive thing Congress has done in years. Nathan's Hot Dogs has been named the official parliamentary sponsor.</p>
-              <div class="article-card__footer">
-                <span>Chad Thunderpen</span>
-                <span>5 min read</span>
-              </div>
-            </div>
-          </a>
-
-          <a href="articles/2026-04-13-apple-iphone-47-mirror-subscription.html" class="article-card">
-            <div class="article-card__img">
-              <div class="gradient-img gradient-img--tech" role="img" aria-label="Tech illustration"></div>
-            </div>
-            <div class="article-card__body">
-              <span class="category-tag category-tag--tech">Tech</span>
-              <h3 class="article-card__headline">Apple Unveils iPhone 47: It's Just a Mirror With a $2,499 Monthly Subscription</h3>
-              <p class="article-card__excerpt">Tim Cook called it 'the most courageous device we've ever charged you for.' Features include your own reflection and a new Self-Awareness app that costs extra.</p>
-              <div class="article-card__footer">
-                <span>Diana Clicksworth</span>
-                <span>4 min read</span>
-              </div>
-            </div>
-          </a>
-
-          <a href="articles/2026-04-12-influencer-hospitalized-unfiltered-life.html" class="article-card">
-            <div class="article-card__img">
-              <div class="gradient-img gradient-img--popculture" role="img" aria-label="Pop Culture illustration"></div>
-            </div>
-            <div class="article-card__body">
-              <span class="category-tag category-tag--popculture">Pop Culture</span>
-              <h3 class="article-card__headline">Local Influencer Hospitalized After Attempting to Live an Unfiltered Life for 24 Hours</h3>
-              <p class="article-card__excerpt">Doctors diagnosed her with acute reality syndrome. She reportedly tried to eat a meal without photographing it and immediately lost consciousness.</p>
-              <div class="article-card__footer">
-                <span>Pepper Scoop</span>
-                <span>3 min read</span>
-              </div>
-            </div>
-          </a>
-
-          <a href="articles/2026-04-12-scientists-choosing-what-to-watch.html" class="article-card">
-            <div class="article-card__img">
-              <div class="gradient-img gradient-img--science" role="img" aria-label="Science illustration"></div>
-            </div>
-            <div class="article-card__body">
-              <span class="category-tag category-tag--science">Science</span>
-              <h3 class="article-card__headline">Scientists Confirm Average Human Spends More Time Choosing What to Watch Than Actually Watching</h3>
-              <p class="article-card__excerpt">Netflix has responded by introducing a 'Just Pick Something' button that costs $4.99 per month. Hulu countered with a 'Watch This or We Cancel It' feature.</p>
-              <div class="article-card__footer">
-                <span>Rex Headliner</span>
-                <span>4 min read</span>
-              </div>
-            </div>
-          </a>
-
-          <a href="articles/2026-04-12-switzerland-accidentally-takes-side.html" class="article-card">
-            <div class="article-card__img">
-              <div class="gradient-img gradient-img--world" role="img" aria-label="World illustration"></div>
-            </div>
-            <div class="article-card__body">
-              <span class="category-tag category-tag--world">World</span>
-              <h3 class="article-card__headline">Switzerland Accidentally Takes a Side, Throws Entire Country Into Existential Crisis</h3>
-              <p class="article-card__excerpt">The Swiss franc dropped 12% as markets reacted to what analysts are calling 'an opinion.' The prime minister has issued a formal apology for 'having a thought.'</p>
-              <div class="article-card__footer">
-                <span>Blaine Deadline</span>
-                <span>6 min read</span>
-              </div>
-            </div>
-          </a>
-
-          <a href="articles/2026-04-11-youth-soccer-bans-parents.html" class="article-card">
-            <div class="article-card__img">
-              <div class="gradient-img gradient-img--sports" role="img" aria-label="Sports illustration"></div>
-            </div>
-            <div class="article-card__body">
-              <span class="category-tag category-tag--sports">Sports</span>
-              <h3 class="article-card__headline">Youth Soccer League Bans Parents After Referee Enters Witness Protection Program</h3>
-              <p class="article-card__excerpt">The referee, known only as Steve, was last seen coaching underwater basket weaving in an undisclosed location. Parents have been replaced by cardboard cutouts.</p>
-              <div class="article-card__footer">
-                <span>Chad Thunderpen</span>
-                <span>3 min read</span>
-              </div>
-            </div>
-          </a>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Newsletter -->
-    <section class="newsletter" aria-label="Newsletter signup">
-      <div class="container">
-        <h2 class="newsletter__title">Get the Nonsense Delivered Fresh</h2>
-        <p class="newsletter__subtitle">Join 47 readers who can't look away. New satirical takes every weekday.</p>
+      <!-- ==========================================
+           NEWSLETTER
+           ========================================== -->
+      <section class="newsletter" aria-label="Newsletter signup">
+        <h2 class="newsletter__title">Get the Nonsense Delivered</h2>
+        <p class="newsletter__subtitle">Join 47 discerning readers who refuse to look away. New satirical dispatches every weekday morning.</p>
         <form class="newsletter__form" aria-label="Newsletter subscription form">
           <label for="newsletter-email" class="sr-only">Email address</label>
           <input type="email" id="newsletter-email" class="newsletter__input" placeholder="your@email.com" required aria-label="Enter your email address">
@@ -339,9 +249,9 @@
         </form>
         <p class="newsletter__disclaimer">We promise to only spam you with the truth. The very, very fake truth.</p>
         <p class="newsletter__success" aria-live="polite"></p>
-      </div>
-    </section>
+      </section>
 
+    </div>
   </main>
 
   <!-- Footer -->
@@ -350,12 +260,12 @@
       <div class="footer__grid">
 
         <div class="footer__section">
-          <h3 class="footer__section-title">About</h3>
-          <p class="footer__about-text">News Tabloid Now is the internet's most trusted source of completely fabricated news. We believe in the power of satire to make you laugh, think, and wonder if maybe our version of events is actually more plausible than what's really happening.</p>
+          <h3 class="footer__section-title">About the Paper</h3>
+          <p class="footer__about-text">News Tabloid Now is the internet's most trusted source of completely fabricated news. We believe in the power of satire to make you laugh, think, and wonder if maybe our version of events is actually more plausible than what is really happening.</p>
         </div>
 
         <div class="footer__section">
-          <h3 class="footer__section-title">Categories</h3>
+          <h3 class="footer__section-title">Sections</h3>
           <div class="footer__links">
             <a href="categories/politics.html">Politics</a>
             <a href="categories/pop-culture.html">Pop Culture</a>

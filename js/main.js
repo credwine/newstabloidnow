@@ -1,13 +1,13 @@
 /* ============================================
    NEWS TABLOID NOW - Main JavaScript
-   Vanilla JS, no frameworks
+   Old-School Newspaper Edition
    ============================================ */
 
 (function () {
   'use strict';
 
   // --- Theme Toggle ---
-  const THEME_KEY = 'ntn-theme';
+  var THEME_KEY = 'ntn-theme';
 
   function getStoredTheme() {
     return localStorage.getItem(THEME_KEY);
@@ -25,17 +25,18 @@
     var icon = btn.querySelector('.theme-toggle__icon');
     var label = btn.querySelector('.theme-toggle__label');
     if (theme === 'dark') {
-      if (icon) icon.textContent = '\u263E';
-      if (label) label.textContent = 'Light Mode';
-    } else {
       if (icon) icon.textContent = '\u2600';
-      if (label) label.textContent = 'Dark Mode';
+      if (label) label.textContent = 'Day Edition';
+    } else {
+      if (icon) icon.textContent = '\u263E';
+      if (label) label.textContent = 'Night Edition';
     }
   }
 
   function initTheme() {
     var stored = getStoredTheme();
-    var theme = stored || 'dark';
+    // Light mode is now the default
+    var theme = stored || 'light';
     setTheme(theme);
 
     var btn = document.querySelector('.theme-toggle');
@@ -79,19 +80,6 @@
     });
   }
 
-  // --- Breaking News Ticker ---
-  function initTicker() {
-    var content = document.querySelector('.breaking-ticker__content');
-    if (!content) return;
-
-    // Duplicate content for seamless loop
-    var clone = content.cloneNode(true);
-    var items = clone.children;
-    while (items.length > 0) {
-      content.appendChild(items[0]);
-    }
-  }
-
   // --- Newsletter Form ---
   function initNewsletter() {
     var form = document.querySelector('.newsletter__form');
@@ -107,7 +95,7 @@
         if (disclaimer) disclaimer.style.display = 'none';
         if (success) {
           success.classList.add('show');
-          success.textContent = 'Welcome to the cult. We mean club.';
+          success.textContent = 'Welcome aboard. Extra! Extra! Check your inbox.';
         }
       }
     });
@@ -231,7 +219,7 @@
       var submitBtn = form.querySelector('.form-submit');
       if (submitBtn) {
         submitBtn.textContent = 'Message Received!';
-        submitBtn.style.background = '#059669';
+        submitBtn.style.background = '#2D5C3F';
         setTimeout(function () {
           form.reset();
           submitBtn.textContent = 'Send Message';
@@ -245,7 +233,6 @@
   function init() {
     initTheme();
     initMobileMenu();
-    initTicker();
     initNewsletter();
     initSmoothScroll();
     initBackToTop();
