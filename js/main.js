@@ -1,49 +1,41 @@
 /* ============================================
    NEWS TABLOID NOW - Main JavaScript
-   Old-School Newspaper Edition
+   Torn Newspaper Clippings Edition
    ============================================ */
 
 (function () {
   'use strict';
 
-  // --- Theme Toggle ---
-  var THEME_KEY = 'ntn-theme';
+  // --- Scroll Animation (IntersectionObserver) ---
+  function initScrollAnimations() {
+    var targets = document.querySelectorAll(
+      '.clipping-wrapper, .breaking-wrapper, .newsletter-wrapper, ' +
+      '.about-intro-wrapper, .team-clipping-wrapper, .contact-wrapper, ' +
+      '.disclaimer-wrapper'
+    );
 
-  function getStoredTheme() {
-    return localStorage.getItem(THEME_KEY);
-  }
+    if (!targets.length) return;
 
-  function setTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem(THEME_KEY, theme);
-    updateToggleLabel(theme);
-  }
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
+      });
 
-  function updateToggleLabel(theme) {
-    var btn = document.querySelector('.theme-toggle');
-    if (!btn) return;
-    var icon = btn.querySelector('.theme-toggle__icon');
-    var label = btn.querySelector('.theme-toggle__label');
-    if (theme === 'dark') {
-      if (icon) icon.textContent = '\u2600';
-      if (label) label.textContent = 'Day Edition';
+      targets.forEach(function (el) {
+        observer.observe(el);
+      });
     } else {
-      if (icon) icon.textContent = '\u263E';
-      if (label) label.textContent = 'Night Edition';
-    }
-  }
-
-  function initTheme() {
-    var stored = getStoredTheme();
-    // Light mode is now the default
-    var theme = stored || 'light';
-    setTheme(theme);
-
-    var btn = document.querySelector('.theme-toggle');
-    if (btn) {
-      btn.addEventListener('click', function () {
-        var current = document.documentElement.getAttribute('data-theme');
-        setTheme(current === 'dark' ? 'light' : 'dark');
+      // Fallback: show everything immediately
+      targets.forEach(function (el) {
+        el.classList.add('in-view');
       });
     }
   }
@@ -95,7 +87,7 @@
         if (disclaimer) disclaimer.style.display = 'none';
         if (success) {
           success.classList.add('show');
-          success.textContent = 'Welcome aboard. Extra! Extra! Check your inbox.';
+          success.textContent = 'Welcome to the cult. We mean club.';
         }
       }
     });
@@ -105,7 +97,9 @@
   function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
       anchor.addEventListener('click', function (e) {
-        var target = document.querySelector(this.getAttribute('href'));
+        var href = this.getAttribute('href');
+        if (href === '#') return;
+        var target = document.querySelector(href);
         if (target) {
           e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -134,17 +128,20 @@
     });
   }
 
-  // --- Current Date Display ---
+  // --- Current Date Display (masthead) ---
   function initDateDisplay() {
-    var el = document.querySelector('.top-bar__date');
-    if (!el) return;
+    var dateline = document.querySelector('.masthead__dateline');
+    if (!dateline) return;
 
     var now = new Date();
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    el.textContent = now.toLocaleDateString('en-US', options);
+    var dateStr = now.toLocaleDateString('en-US', options);
+
+    // Update the dateline text while keeping the format
+    dateline.innerHTML = 'Vol. I, No. 1 &ensp;|&ensp; ' + dateStr + ' &ensp;|&ensp; Final Edition &ensp;|&ensp; Price: Free (Your Sanity May Vary)';
   }
 
-  // --- Lazy Load Images (IntersectionObserver) ---
+  // --- Lazy Load Images (native + fallback) ---
   function initLazyLoad() {
     var lazyImages = document.querySelectorAll('[data-lazy]');
     if (!lazyImages.length) return;
@@ -231,7 +228,7 @@
 
   // --- Initialize Everything ---
   function init() {
-    initTheme();
+    initScrollAnimations();
     initMobileMenu();
     initNewsletter();
     initSmoothScroll();

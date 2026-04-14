@@ -22,7 +22,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
@@ -31,32 +31,21 @@
 
   <a href="#main-content" class="skip-nav">Skip to main content</a>
 
-  <!-- Top Bar -->
-  <div class="top-bar">
-    <div class="container">
-      <time class="top-bar__date" datetime="2026-04-13">Sunday, April 13, 2026</time>
-      <button class="theme-toggle" aria-label="Toggle day and night edition">
-        <span class="theme-toggle__icon" aria-hidden="true">&#9790;</span>
-        <span class="theme-toggle__label">Night Edition</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Masthead / Nameplate -->
-  <header class="masthead">
-    <div class="container">
+  <!-- Masthead Clipping -->
+  <div class="masthead-wrapper">
+    <header class="masthead">
       <hr class="masthead__rule-top" aria-hidden="true">
       <h1 class="masthead__title"><a href="index.html">NEWS TABLOID NOW</a></h1>
       <p class="masthead__tagline">Seriously Hilarious. Unbelievably True.</p>
       <p class="masthead__dateline">Vol. I, No. 1 &ensp;|&ensp; Sunday, April 13, 2026 &ensp;|&ensp; Final Edition &ensp;|&ensp; Price: Free (Your Sanity May Vary)</p>
       <hr class="masthead__rule-double" aria-hidden="true">
-    </div>
-  </header>
+    </header>
+  </div>
 
   <!-- Navigation -->
   <nav class="main-nav" aria-label="Main navigation">
     <div class="container">
-      <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <button type="button" class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
         <span></span>
         <span></span>
         <span></span>
@@ -81,65 +70,73 @@
 
   <!-- Main Content -->
   <main id="main-content">
-    <div class="about-content">
+    <div class="about-layout">
 
-      <h1>About the Paper</h1>
+      <!-- About Intro - Large torn clipping -->
+      <div class="about-intro-wrapper">
+        <div class="about-intro clipping--tear-2">
 
-      <p class="lead">Founded in 2026 by a group of journalists who could not take it anymore, News Tabloid Now is the internet's most trusted source of completely fabricated news. We believe that in a world where reality is already absurd, the only responsible thing to do is make it slightly more absurd.</p>
+          <h1>About the Paper</h1>
 
-      <p>What started as a group chat where five reporters would vent about increasingly unbelievable real headlines has evolved into a full-scale publication dedicated to the fine art of deadpan absurdism. Every article you read here is crafted with the same editorial rigor you would expect from a Pulitzer-winning newsroom, except everything is made up and the facts do not matter.</p>
+          <p class="lead">Founded in 2026 by a group of journalists who could not take it anymore, News Tabloid Now is the internet's most trusted source of completely fabricated news. We believe that in a world where reality is already absurd, the only responsible thing to do is make it slightly more absurd.</p>
 
-      <p>We hold ourselves to the highest journalistic standards of fiction. Every fake quote is carefully attributed to a fake expert. Every fabricated statistic is presented with complete confidence. Every story is workshopped until it achieves that perfect balance of "this is ridiculous" and "wait, is this real?"</p>
+          <p>What started as a group chat where five reporters would vent about increasingly unbelievable real headlines has evolved into a full-scale publication dedicated to the fine art of deadpan absurdism. Every article you read here is crafted with the same editorial rigor you would expect from a Pulitzer-winning newsroom, except everything is made up and the facts do not matter.</p>
 
-      <h2>Our Mission</h2>
+          <p>We hold ourselves to the highest journalistic standards of fiction. Every fake quote is carefully attributed to a fake expert. Every fabricated statistic is presented with complete confidence. Every story is workshopped until it achieves that perfect balance of "this is ridiculous" and "wait, is this real?"</p>
 
-      <p>To make you laugh, think, and then wonder if maybe our version of events is actually more plausible than what is really happening.</p>
+          <h2>Our Mission</h2>
 
-      <p>We believe satire is not just comedy. It is a public service. In an era where the line between news and fiction has been blurred beyond recognition, we figured we might as well have fun on this side of it. If you are going to read something that sounds too insane to be true, it might as well be written by professionals.</p>
+          <p>To make you laugh, think, and then wonder if maybe our version of events is actually more plausible than what is really happening.</p>
 
-      <h2>Our Staff</h2>
+          <p>We believe satire is not just comedy. It is a public service. In an era where the line between news and fiction has been blurred beyond recognition, we figured we might as well have fun on this side of it. If you are going to read something that sounds too insane to be true, it might as well be written by professionals.</p>
+
+        </div>
+      </div>
+
+      <!-- Our Staff - Grid of clipping bios -->
+      <p class="team-section-header">Our Staff</p>
 
       <div class="team-grid">
 
-        <div class="team-card">
-          <div class="team-card__avatar" style="background: var(--cat-politics);" aria-hidden="true">C</div>
-          <div class="team-card__info">
+        <div class="team-clipping-wrapper">
+          <div class="team-card">
+            <div class="team-card__avatar" style="background: var(--cat-politics);" aria-hidden="true">C</div>
             <h3 class="team-card__name">Chad Thunderpen</h3>
             <p class="team-card__role">Senior Political Correspondent</p>
             <p class="team-card__bio">Previously fired from three legitimate newspapers for "excessive use of air quotes." Chad covers politics with the gravitas of a man who once filibustered his own performance review. He holds a master's degree in Sarcasm from an institution that asked him to stop listing them on his resume.</p>
           </div>
         </div>
 
-        <div class="team-card">
-          <div class="team-card__avatar" style="background: var(--cat-tech);" aria-hidden="true">D</div>
-          <div class="team-card__info">
+        <div class="team-clipping-wrapper">
+          <div class="team-card">
+            <div class="team-card__avatar" style="background: var(--cat-tech);" aria-hidden="true">D</div>
             <h3 class="team-card__name">Diana Clicksworth</h3>
             <p class="team-card__role">Technology Editor</p>
             <p class="team-card__bio">Has never successfully connected to Bluetooth on the first try. Diana's coverage of Silicon Valley is informed by years of trying to cancel free trials and accidentally agreeing to terms of service. She once got into a 45-minute argument with a chatbot and lost.</p>
           </div>
         </div>
 
-        <div class="team-card">
-          <div class="team-card__avatar" style="background: var(--cat-popculture);" aria-hidden="true">P</div>
-          <div class="team-card__info">
+        <div class="team-clipping-wrapper">
+          <div class="team-card">
+            <div class="team-card__avatar" style="background: var(--cat-popculture);" aria-hidden="true">P</div>
             <h3 class="team-card__name">Pepper Scoop</h3>
             <p class="team-card__role">Culture &amp; Entertainment</p>
             <p class="team-card__bio">Once got blocked by a celebrity for writing a review that was "too accurate." Pepper has covered red carpets, award shows, and the catastrophic rise and fall of at least seven TikTok trends. Her writing has been described as "devastatingly precise" by people she has devastated.</p>
           </div>
         </div>
 
-        <div class="team-card">
-          <div class="team-card__avatar" style="background: var(--cat-science);" aria-hidden="true">R</div>
-          <div class="team-card__info">
+        <div class="team-clipping-wrapper">
+          <div class="team-card">
+            <div class="team-card__avatar" style="background: var(--cat-science);" aria-hidden="true">R</div>
             <h3 class="team-card__name">Rex Headliner</h3>
             <p class="team-card__role">Science &amp; Research</p>
             <p class="team-card__bio">Holds a PhD in Making Things Sound More Alarming Than They Are. Rex's ability to transform mundane findings into existential crises is unmatched in modern journalism. His thesis, "Why Everything You Love Is Probably Bad For You," was rejected by peer review but went viral on Facebook.</p>
           </div>
         </div>
 
-        <div class="team-card">
-          <div class="team-card__avatar" style="background: var(--cat-world);" aria-hidden="true">B</div>
-          <div class="team-card__info">
+        <div class="team-clipping-wrapper">
+          <div class="team-card">
+            <div class="team-card__avatar" style="background: var(--cat-world);" aria-hidden="true">B</div>
             <h3 class="team-card__name">Blaine Deadline</h3>
             <p class="team-card__role">International Affairs</p>
             <p class="team-card__bio">Has visited 47 countries and been politely asked to leave 12 of them. Blaine specializes in making geopolitics accessible by explaining complex international relations through increasingly strained food metaphors. His diplomatic immunity was revoked after an incident he describes only as "the fondue situation."</p>
@@ -148,28 +145,35 @@
 
       </div>
 
-      <h2 id="contact">Letters to the Editor</h2>
+      <!-- Contact Form Clipping -->
+      <div class="contact-wrapper" id="contact">
+        <div class="contact-clipping">
+          <h2>Letters to the Editor</h2>
+          <p>Got a tip? A complaint? An unsolicited life story? We would love to hear it. We probably will not respond, but we will definitely read it during our lunch break.</p>
 
-      <p>Got a tip? A complaint? An unsolicited life story? We would love to hear it. We probably will not respond, but we will definitely read it during our lunch break.</p>
+          <form class="contact-form" aria-label="Contact form">
+            <div class="form-group">
+              <label for="contact-name">Name</label>
+              <input type="text" id="contact-name" name="name" placeholder="Your name (real or imagined)" required>
+            </div>
+            <div class="form-group">
+              <label for="contact-email">Email</label>
+              <input type="email" id="contact-email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" placeholder="Tell us everything. Or nothing. We are flexible." required></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send Message</button>
+          </form>
+        </div>
+      </div>
 
-      <form class="contact-form" aria-label="Contact form">
-        <div class="form-group">
-          <label for="contact-name">Name</label>
-          <input type="text" id="contact-name" name="name" placeholder="Your name (real or imagined)" required>
+      <!-- Disclaimer Clipping -->
+      <div class="disclaimer-wrapper">
+        <div class="disclaimer">
+          <p><strong>Disclaimer:</strong> News Tabloid Now is a satirical publication. All articles are fictional and intended for entertainment purposes only. If you are citing us in a research paper, please reconsider your academic career. Names, characters, businesses, events, and incidents are either the products of our imagination or used in a fictitious manner. Any resemblance to actual persons, living or dead, or actual events is purely coincidental and frankly a little concerning.</p>
         </div>
-        <div class="form-group">
-          <label for="contact-email">Email</label>
-          <input type="email" id="contact-email" name="email" placeholder="your@email.com" required>
-        </div>
-        <div class="form-group">
-          <label for="contact-message">Message</label>
-          <textarea id="contact-message" name="message" placeholder="Tell us everything. Or nothing. We are flexible." required></textarea>
-        </div>
-        <button type="submit" class="form-submit">Send Message</button>
-      </form>
-
-      <div class="disclaimer">
-        <p><strong>Disclaimer:</strong> News Tabloid Now is a satirical publication. All articles are fictional and intended for entertainment purposes only. If you are citing us in a research paper, please reconsider your academic career. Names, characters, businesses, events, and incidents are either the products of our imagination or used in a fictitious manner. Any resemblance to actual persons, living or dead, or actual events is purely coincidental and frankly a little concerning.</p>
       </div>
 
     </div>
@@ -227,7 +231,7 @@
   </footer>
 
   <!-- Back to Top -->
-  <button class="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+  <button type="button" class="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
 
   <script src="js/main.js"></script>
 </body>
