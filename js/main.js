@@ -1,39 +1,195 @@
 /* ============================================
    NEWS TABLOID NOW - Main JavaScript
-   Torn Newspaper Clippings - CHAOS EDITION
+   Scrapbook Chaos Engine
    ============================================ */
 
 (function () {
   'use strict';
 
-  // Animation classes for varied entrance effects
   var ANIM_CLASSES = ['anim-slam', 'anim-fly-left', 'anim-fly-right', 'anim-fly-bottom', 'anim-pop'];
 
-  // Check if user prefers reduced motion
   function prefersReducedMotion() {
     return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
-  // --- Scroll Animation (IntersectionObserver) with VARIED animations ---
+  /* ============================================
+     SEEDED RANDOM (deterministic per page load
+     so layout doesn't jump on resize)
+     ============================================ */
+  var _seed = Date.now() % 10000;
+  function seededRandom() {
+    _seed = (_seed * 16807 + 0) % 2147483647;
+    return (_seed & 0x7fffffff) / 2147483647;
+  }
+  function randRange(min, max) { return min + seededRandom() * (max - min); }
+  function randInt(min, max) { return Math.floor(randRange(min, max + 1)); }
+  function pick(arr) { return arr[randInt(0, arr.length - 1)]; }
+
+  /* ============================================
+     GENERATE UNIQUE TORN EDGE CLIP-PATHS
+     Each clipping gets a completely unique tear
+     ============================================ */
+  function generateTornClipPath() {
+    // Top edge - random jagged tears
+    var top = [];
+    var steps = randInt(18, 30);
+    for (var i = 0; i <= steps; i++) {
+      var x = (i / steps) * 100;
+      var y = i === 0 || i === steps ? randRange(0, 2) : randRange(0, 4.5);
+      top.push(x.toFixed(1) + '% ' + y.toFixed(1) + '%');
+    }
+
+    // Right edge
+    var right = [];
+    var rSteps = randInt(8, 14);
+    for (var j = 0; j <= rSteps; j++) {
+      var ry = (j / rSteps) * 100;
+      var rx = 100 - randRange(0, 2.5);
+      right.push(rx.toFixed(1) + '% ' + ry.toFixed(1) + '%');
+    }
+
+    // Bottom edge (reversed)
+    var bottom = [];
+    var bSteps = randInt(18, 30);
+    for (var k = bSteps; k >= 0; k--) {
+      var bx = (k / bSteps) * 100;
+      var by = 100 - randRange(0, 4.5);
+      bottom.push(bx.toFixed(1) + '% ' + by.toFixed(1) + '%');
+    }
+
+    // Left edge (reversed)
+    var left = [];
+    var lSteps = randInt(8, 14);
+    for (var l = lSteps; l >= 0; l--) {
+      var ly = (l / lSteps) * 100;
+      var lx = randRange(0, 2.5);
+      left.push(lx.toFixed(1) + '% ' + ly.toFixed(1) + '%');
+    }
+
+    return 'polygon(' + top.concat(right.slice(1), bottom.slice(1), left.slice(1)).join(', ') + ')';
+  }
+
+  /* ============================================
+     PAPER COLORS - 10 varieties
+     ============================================ */
+  var PAPERS = [
+    '#F5F0E4',  // standard cream
+    '#EDE8D8',  // warm cream
+    '#F0EBE0',  // light parchment
+    '#E8E2D0',  // deeply aged
+    '#FAF7F0',  // nearly white (fresh)
+    '#E5DFD0',  // very aged
+    '#F2EDE2',  // cool cream
+    '#E0D8C4',  // brown-ish aged
+    '#FBF8F2',  // bright white newsprint
+    '#DDD6C2',  // old manila
+  ];
+
+  /* ============================================
+     DECORATION CONFIGS
+     ============================================ */
+  var TAPE_COLORS = [
+    'rgba(255, 255, 220, 0.5)',
+    'rgba(255, 255, 200, 0.45)',
+    'rgba(240, 240, 210, 0.55)',
+    'rgba(255, 250, 230, 0.4)',
+    'rgba(220, 220, 200, 0.5)',  // aged/grey tape
+  ];
+
+  var PIN_COLORS = ['pin-red', 'pin-yellow', 'pin-blue', 'pin-green'];
+
+  /* ============================================
+     RANDOMIZE ALL CLIPPINGS
+     Core function: makes each one unique
+     ============================================ */
+  function randomizeClippings() {
+    var clippings = document.querySelectorAll('.clipping');
+    var isMobile = window.innerWidth < 680;
+
+    clippings.forEach(function (clip) {
+      // Skip article page main clipping (keep it readable)
+      var isArticlePage = clip.classList.contains('clipping--article');
+
+      // 1. UNIQUE TORN EDGES
+      clip.style.clipPath = generateTornClipPath();
+      clip.style.webkitClipPath = clip.style.clipPath;
+
+      // 2. RANDOM ROTATION
+      var maxRot = isArticlePage ? 0.8 : (isMobile ? 2.5 : 4.5);
+      var rotation = randRange(-maxRot, maxRot);
+      clip.style.setProperty('--rotation', rotation.toFixed(2) + 'deg');
+
+      // 3. RANDOM PAPER COLOR
+      clip.style.setProperty('--paper-bg', pick(PAPERS));
+      clip.style.background = 'var(--paper-bg)';
+
+      // 4. RANDOM DECORATIONS (30% tape, 20% pin, 15% stain, 15% fold, 10% yellowed)
+      var roll = seededRandom();
+
+      if (roll < 0.30) {
+        // TAPE
+        clip.classList.add('has-tape');
+        clip.style.setProperty('--tape-top', randRange(-8, -3) + 'px');
+        if (seededRandom() > 0.5) {
+          clip.style.setProperty('--tape-left', randRange(15, 60) + '%');
+          clip.style.setProperty('--tape-right', 'auto');
+        } else {
+          clip.style.setProperty('--tape-right', randRange(10, 50) + '%');
+          clip.style.setProperty('--tape-left', 'auto');
+        }
+        clip.style.setProperty('--tape-width', randRange(55, 100) + 'px');
+        clip.style.setProperty('--tape-height', randRange(18, 28) + 'px');
+        clip.style.setProperty('--tape-color', pick(TAPE_COLORS));
+        clip.style.setProperty('--tape-angle', randRange(-6, 6) + 'deg');
+      } else if (roll < 0.50) {
+        // PIN
+        clip.classList.add('has-pin');
+        clip.classList.add(pick(PIN_COLORS));
+        clip.style.setProperty('--pin-top', randRange(6, 18) + 'px');
+        clip.style.setProperty('--pin-left', randRange(30, 70) + '%');
+        clip.style.setProperty('--pin-size', randRange(12, 18) + 'px');
+      } else if (roll < 0.65) {
+        // COFFEE STAIN
+        clip.classList.add('has-stain');
+        clip.style.setProperty('--stain-bottom', randRange(5, 30) + '%');
+        clip.style.setProperty('--stain-right', randRange(5, 30) + '%');
+        clip.style.setProperty('--stain-size', randRange(50, 110) + 'px');
+        clip.style.setProperty('--stain-angle', randRange(0, 360) + 'deg');
+      } else if (roll < 0.80) {
+        // FOLD LINE
+        clip.classList.add('has-fold');
+        clip.style.setProperty('--fold-angle', randRange(110, 160) + 'deg');
+      } else if (roll < 0.90) {
+        // YELLOWED EDGES
+        clip.classList.add('has-yellowed');
+      }
+      // 10% get no decoration (clean clipping)
+
+      // 5. SLIGHT RANDOM OFFSET for organic placement
+      if (!isArticlePage && !isMobile) {
+        var xOffset = randRange(-8, 8);
+        var yOffset = randRange(-5, 5);
+        clip.parentElement.style.transform = 'translate(' + xOffset + 'px, ' + yOffset + 'px)';
+      }
+    });
+  }
+
+  /* ============================================
+     SCROLL ANIMATIONS
+     ============================================ */
   function initScrollAnimations() {
     var targets = document.querySelectorAll(
       '.clipping-wrapper, .clipping-wrapper--related, .breaking-wrapper, .newsletter-wrapper, ' +
-      '.about-intro-wrapper, .team-clipping-wrapper, .contact-wrapper, ' +
-      '.disclaimer-wrapper'
+      '.about-intro-wrapper, .team-clipping-wrapper, .contact-wrapper, .disclaimer-wrapper'
     );
 
     if (!targets.length) return;
 
-    // Pre-assign random animation classes to each clipping wrapper
     if (!prefersReducedMotion()) {
       targets.forEach(function (el, i) {
-        if (el.classList.contains('clipping-wrapper') || el.classList.contains('clipping-wrapper--related')) {
-          // Assign a varied animation class based on position + some randomness
-          var animIndex = (i * 7 + i * i * 3) % ANIM_CLASSES.length;
-          el.classList.add(ANIM_CLASSES[animIndex]);
-          // Stagger animation delays based on position
-          el.style.animationDelay = (i * 0.12) + 's';
-        }
+        var animIndex = randInt(0, ANIM_CLASSES.length - 1);
+        el.classList.add(ANIM_CLASSES[animIndex]);
+        el.style.animationDelay = (i * 0.1 + seededRandom() * 0.15) + 's';
       });
     }
 
@@ -45,23 +201,17 @@
             observer.unobserve(entry.target);
           }
         });
-      }, {
-        threshold: 0.08,
-        rootMargin: '0px 0px -40px 0px'
-      });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-      targets.forEach(function (el) {
-        observer.observe(el);
-      });
+      targets.forEach(function (el) { observer.observe(el); });
     } else {
-      // Fallback: show everything immediately
-      targets.forEach(function (el) {
-        el.classList.add('in-view');
-      });
+      targets.forEach(function (el) { el.classList.add('in-view'); });
     }
   }
 
-  // --- Mobile Menu ---
+  /* ============================================
+     MOBILE MENU
+     ============================================ */
   function initMobileMenu() {
     var hamburger = document.querySelector('.hamburger');
     var navLinks = document.querySelector('.nav-links');
@@ -74,7 +224,6 @@
       hamburger.setAttribute('aria-expanded', String(!expanded));
     });
 
-    // Close on link click
     navLinks.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         hamburger.classList.remove('active');
@@ -83,7 +232,6 @@
       });
     });
 
-    // Close on outside click
     document.addEventListener('click', function (e) {
       if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
         hamburger.classList.remove('active');
@@ -93,7 +241,9 @@
     });
   }
 
-  // --- Newsletter Form ---
+  /* ============================================
+     NEWSLETTER
+     ============================================ */
   function initNewsletter() {
     var form = document.querySelector('.newsletter__form');
     if (!form) return;
@@ -114,7 +264,9 @@
     });
   }
 
-  // --- Smooth Scroll ---
+  /* ============================================
+     SMOOTH SCROLL
+     ============================================ */
   function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
       anchor.addEventListener('click', function (e) {
@@ -129,27 +281,26 @@
     });
   }
 
-  // --- Back to Top Button ---
+  /* ============================================
+     BACK TO TOP
+     ============================================ */
   function initBackToTop() {
     var btn = document.querySelector('.back-to-top');
     if (!btn) return;
 
     function toggleVisibility() {
-      if (window.scrollY > 500) {
-        btn.classList.add('visible');
-      } else {
-        btn.classList.remove('visible');
-      }
+      btn.classList.toggle('visible', window.scrollY > 500);
     }
 
     window.addEventListener('scroll', toggleVisibility, { passive: true });
-
     btn.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
-  // --- Current Date Display (masthead) ---
+  /* ============================================
+     DATE DISPLAY
+     ============================================ */
   function initDateDisplay() {
     var dateline = document.querySelector('.masthead__dateline');
     if (!dateline) return;
@@ -157,12 +308,12 @@
     var now = new Date();
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     var dateStr = now.toLocaleDateString('en-US', options);
-
-    // Update the dateline text while keeping the format
     dateline.innerHTML = 'Vol. I, No. 1 &ensp;|&ensp; ' + dateStr + ' &ensp;|&ensp; Final Edition &ensp;|&ensp; Price: Free (Your Sanity May Vary)';
   }
 
-  // --- Lazy Load Images (native + fallback) ---
+  /* ============================================
+     LAZY LOAD
+     ============================================ */
   function initLazyLoad() {
     var lazyImages = document.querySelectorAll('[data-lazy]');
     if (!lazyImages.length) return;
@@ -181,15 +332,14 @@
         });
       }, { rootMargin: '100px' });
 
-      lazyImages.forEach(function (img) {
-        observer.observe(img);
-      });
+      lazyImages.forEach(function (img) { observer.observe(img); });
     }
   }
 
-  // --- Share Buttons (both old .share-btn--X and new data-platform) ---
+  /* ============================================
+     SHARE BUTTONS
+     ============================================ */
   function initShareButtons() {
-    // New data-platform share buttons (article pages)
     document.querySelectorAll('.share-btn[data-platform]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var platform = btn.getAttribute('data-platform');
@@ -218,47 +368,11 @@
         }
       });
     });
-
-    // Legacy class-based share buttons (index page)
-    document.querySelectorAll('.share-btn--copy').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var url = window.location.href;
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(url).then(function () {
-            btn.textContent = 'Copied!';
-            setTimeout(function () {
-              btn.textContent = 'Copy Link';
-            }, 2000);
-          });
-        }
-      });
-    });
-
-    document.querySelectorAll('.share-btn--twitter').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var title = document.querySelector('h1') ? document.querySelector('h1').textContent : document.title;
-        var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(window.location.href);
-        window.open(url, '_blank', 'width=550,height=420');
-      });
-    });
-
-    document.querySelectorAll('.share-btn--facebook').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var url = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href);
-        window.open(url, '_blank', 'width=550,height=420');
-      });
-    });
-
-    document.querySelectorAll('.share-btn--reddit').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var title = document.querySelector('h1') ? document.querySelector('h1').textContent : document.title;
-        var url = 'https://www.reddit.com/submit?url=' + encodeURIComponent(window.location.href) + '&title=' + encodeURIComponent(title);
-        window.open(url, '_blank', 'width=550,height=420');
-      });
-    });
   }
 
-  // --- Contact Form ---
+  /* ============================================
+     CONTACT FORM
+     ============================================ */
   function initContactForm() {
     var form = document.querySelector('.contact-form');
     if (!form) return;
@@ -278,52 +392,33 @@
     });
   }
 
-  // --- Click-to-Navigate Animation ---
-  // Briefly scales up clipping before navigating to article
+  /* ============================================
+     CLICK-TO-NAVIGATE ANIMATION
+     ============================================ */
   function initClickAnimation() {
     if (prefersReducedMotion()) return;
 
-    document.querySelectorAll('.clipping-wrapper a, .clipping a.clipping__headline a').forEach(function (link) {
-      // Only intercept links that navigate to another page
+    document.querySelectorAll('.clipping-wrapper a, a.clipping-wrapper--related').forEach(function (link) {
       if (!link.href || link.href === '#' || link.href.startsWith('javascript')) return;
 
       link.addEventListener('click', function (e) {
-        var wrapper = this.closest('.clipping-wrapper') || this.closest('.clipping-wrapper--related');
-        if (wrapper) {
-          e.preventDefault();
-          var href = this.href;
-          wrapper.style.transition = 'transform 0.3s ease, filter 0.3s ease';
-          wrapper.style.transform = 'scale(1.05)';
-          wrapper.style.filter = 'drop-shadow(10px 16px 30px rgba(0,0,0,0.6))';
-          wrapper.style.zIndex = '100';
-          setTimeout(function () { window.location.href = href; }, 300);
-        }
-      });
-    });
-
-    // Also handle the wrapper-level links (related articles use <a class="clipping-wrapper--related">)
-    document.querySelectorAll('a.clipping-wrapper--related').forEach(function (link) {
-      if (!link.href) return;
-
-      link.addEventListener('click', function (e) {
+        var wrapper = this.closest('.clipping-wrapper') || this;
         e.preventDefault();
         var href = this.href;
-        this.style.transition = 'transform 0.3s ease, filter 0.3s ease';
-        this.style.transform = 'scale(1.05)';
-        this.style.filter = 'drop-shadow(10px 16px 30px rgba(0,0,0,0.6))';
-        this.style.zIndex = '100';
-        setTimeout(function () { window.location.href = href; }, 300);
+        wrapper.style.transition = 'transform 0.3s ease, filter 0.3s ease';
+        wrapper.style.transform = 'scale(1.06) rotate(0deg)';
+        wrapper.style.filter = 'drop-shadow(10px 16px 30px rgba(0,0,0,0.6))';
+        wrapper.style.zIndex = '100';
+        setTimeout(function () { window.location.href = href; }, 280);
       });
     });
   }
 
-  // --- Parallax Background ---
-  // Subtle mouse-move parallax on the dark surface background
+  /* ============================================
+     PARALLAX BACKGROUND
+     ============================================ */
   function initParallax() {
-    if (prefersReducedMotion()) return;
-
-    // Only on desktop (no touch)
-    if ('ontouchstart' in window) return;
+    if (prefersReducedMotion() || 'ontouchstart' in window) return;
 
     document.addEventListener('mousemove', function (e) {
       var x = (e.clientX / window.innerWidth - 0.5) * 8;
@@ -332,7 +427,9 @@
     });
   }
 
-  // --- Breaking News Typewriter Effect ---
+  /* ============================================
+     BREAKING NEWS TYPEWRITER
+     ============================================ */
   function initTypewriter() {
     if (prefersReducedMotion()) return;
 
@@ -350,19 +447,11 @@
     });
   }
 
-  // --- Cursor Enhancement ---
-  // Add cursor: grab on clipping hover for the scrapbook feel
-  function initCursorEffects() {
-    var style = document.createElement('style');
-    style.textContent =
-      '.clipping-wrapper { cursor: grab; }' +
-      '.clipping-wrapper:active { cursor: grabbing; }' +
-      '.clipping-wrapper a, .clipping a[href], a.clipping-wrapper--related { cursor: pointer; }';
-    document.head.appendChild(style);
-  }
-
-  // --- Initialize Everything ---
+  /* ============================================
+     INIT
+     ============================================ */
   function init() {
+    randomizeClippings();
     initScrollAnimations();
     initMobileMenu();
     initNewsletter();
@@ -375,7 +464,6 @@
     initClickAnimation();
     initParallax();
     initTypewriter();
-    initCursorEffects();
   }
 
   if (document.readyState === 'loading') {
