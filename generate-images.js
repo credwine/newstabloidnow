@@ -8,28 +8,28 @@ const IMAGES_DIR = path.join(__dirname, "images");
 
 const articles = [
   {
-    file: "senate-filibuster.jpg",
-    prompt: "Professional editorial news photograph inside the U.S. Senate chamber, senators at their desks surrounded by hot dogs and competitive eating equipment, chaotic scene with suited politicians eating frantically, photojournalistic style, bright interior lighting from overhead chandeliers, well-lit, no dark areas at top of image, newspaper front page photography, high resolution, realistic"
+    file: "alien-mayor.jpg",
+    prompt: "Grainy black and white tabloid newspaper photograph of a tall grey alien in an ill-fitting business suit standing behind a podium at a city hall press conference, shaking hands with confused city officials, American flags in the background, flash photography, harsh shadows, 1990s tabloid newspaper photo quality, photojournalistic style, no dark areas at top"
   },
   {
-    file: "iphone-mirror.jpg",
-    prompt: "Minimalist product photograph of a sleek modern smartphone standing upright on a white pedestal that is literally just a mirror showing a reflection, Apple keynote presentation style, dramatic studio lighting from above, bright white background, no dark areas at top of image, clean product photography, high resolution"
+    file: "time-traveler.jpg",
+    prompt: "Grainy black and white tabloid newspaper photograph of a bewildered man in futuristic silver clothing standing in the middle of a busy 1990s shopping mall food court, holding a strange glowing device, shoppers staring at him, security guards approaching, harsh flash photography, vintage tabloid newspaper photo style, no dark areas at top"
   },
   {
-    file: "influencer-hospital.jpg",
-    prompt: "Editorial news photograph of a bewildered young woman in a hospital gown sitting on a hospital bed looking confused at an old flip phone, medical monitors in background, photojournalistic documentary style, bright fluorescent hospital lighting, no dark areas at top of image, newspaper photography, realistic"
+    file: "bigfoot-irs.jpg",
+    prompt: "Grainy black and white tabloid newspaper photograph of a large sasquatch bigfoot creature sitting at a desk in a government office cubicle, wearing reading glasses and a tie, surrounded by stacks of paper and filing cabinets, looking stressed, harsh fluorescent office lighting, tabloid newspaper photo quality, no dark areas at top"
   },
   {
-    file: "scientists-streaming.jpg",
-    prompt: "Professional photograph of three frustrated researchers in white lab coats gathered around computer monitors displaying streaming service browsing interfaces with rows of movie thumbnails, modern research laboratory setting, bright overhead fluorescent lighting, no dark areas at top of image, editorial news photography, realistic"
+    file: "moon-cheese.jpg",
+    prompt: "Grainy black and white tabloid newspaper photograph of NASA scientists in white lab coats in a laboratory examining what appears to be a giant wheel of swiss cheese on a metal table, one scientist is tasting a piece while others take notes, bright laboratory lighting, vintage tabloid newspaper photo quality, no dark areas at top"
   },
   {
-    file: "switzerland-diplomat.jpg",
-    prompt: "News photograph of a panicked middle-aged diplomat in a suit at a wooden press conference podium with microphones, Swiss flags with white cross on red background behind him, hands raised in defensive gesture, press conference setting, bright stage lighting from above, no dark areas at top of image, photojournalistic style, realistic"
+    file: "robot-therapist.jpg",
+    prompt: "Grainy black and white tabloid newspaper photograph of a humanoid robot sitting in a therapist chair across from a human patient lying on a couch, the robot is taking notes on a clipboard, modern office setting, lamp lighting, vintage tabloid newspaper photo quality, no dark areas at top"
   },
   {
-    file: "soccer-parents.jpg",
-    prompt: "Sports photograph of an empty youth soccer field sideline with folding chairs knocked over, a referee whistle abandoned on the grass, and cardboard cutout figures of angry parents placed in the small metal bleachers, bright daylight, overcast bright sky, no harsh shadows, sports photojournalism, realistic, no dark areas at top"
+    file: "ghost-congress.jpg",
+    prompt: "Grainy black and white tabloid newspaper photograph of a translucent ghostly figure floating above the seats in the United States Congress chamber, members of congress looking up in shock, dramatic lighting with lens flare, vintage tabloid newspaper photo quality, no dark areas at top"
   }
 ];
 
@@ -87,7 +87,6 @@ async function main() {
       failed++;
       console.error(`  FAILED: ${article.file}`);
     }
-    // Small delay between generations
     await new Promise(r => setTimeout(r, 2000));
   }
 

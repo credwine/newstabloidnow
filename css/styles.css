@@ -26,12 +26,12 @@
   --accent-hover: #6B0000;
 
   /* Category colors */
-  --cat-politics: #8B0000;
-  --cat-popculture: #5C3D6E;
+  --cat-aliens: #2E8B57;
+  --cat-timetravel: #4169E1;
+  --cat-cryptids: #8B4513;
+  --cat-space: #483D8B;
   --cat-tech: #1B3A5C;
-  --cat-world: #2D5C3F;
-  --cat-science: #7A5A1A;
-  --cat-sports: #1A4A5C;
+  --cat-paranormal: #800080;
 
   /* Spacing */
   --gap: 1.5rem;
@@ -428,7 +428,7 @@ input, textarea {
 .clipping__img {
   width: 100%;
   height: auto;
-  filter: grayscale(80%) contrast(1.2) sepia(10%);
+  filter: grayscale(100%) contrast(1.3);
   display: block;
   border: 1px solid rgba(0,0,0,0.1);
 }
@@ -457,12 +457,12 @@ input, textarea {
   padding-bottom: 1px;
 }
 
-.clipping__category--politics { color: var(--cat-politics); }
-.clipping__category--popculture { color: var(--cat-popculture); }
+.clipping__category--aliens { color: var(--cat-aliens); }
+.clipping__category--timetravel { color: var(--cat-timetravel); }
+.clipping__category--cryptids { color: var(--cat-cryptids); }
+.clipping__category--space { color: var(--cat-space); }
 .clipping__category--tech { color: var(--cat-tech); }
-.clipping__category--world { color: var(--cat-world); }
-.clipping__category--science { color: var(--cat-science); }
-.clipping__category--sports { color: var(--cat-sports); }
+.clipping__category--paranormal { color: var(--cat-paranormal); }
 
 .clipping__headline {
   font-family: var(--font-headline);
@@ -2009,7 +2009,7 @@ input, textarea {
 .clipping--related .clipping__img {
   width: 100%;
   height: auto;
-  filter: grayscale(80%) contrast(1.2) sepia(10%);
+  filter: grayscale(100%) contrast(1.3);
   border: none;
   border-bottom: 1px solid rgba(0,0,0,0.08);
 }
